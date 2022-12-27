@@ -4,35 +4,44 @@ using UnityEngine;
 
 public class Pad : MonoBehaviour
 {
-    public float padMaxX; 
+    public float padMaxX;
+
+    public bool autoplay;
     float yPosition;
+    Pause pause;
+    Ball ball;
+
     private void Start()
     {
+        pause = FindObjectOfType<Pause>();
+        ball = FindObjectOfType<Ball>();
+
         yPosition = transform.position.y;
         Cursor.visible = false;
     }
     private void Update()
     {
-        Vector3 mousePixelPosition = Input.mousePosition;
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePixelPosition);
+        Vector3 padNewPosition;
 
-        //mouseWorldPosition.z = 0;
-        //mouseWorldPosition.y = yPosition;
+        if (pause.pauseActive)
+        {
+            return;
+        }
 
-        Vector3 padNewPosition = new Vector3(mouseWorldPosition.x, yPosition, 0);
+        if (autoplay)
+        {
+            Vector3 ballPosition = ball.transform.position;
+            padNewPosition = new Vector3(ballPosition.x, yPosition, 0);
+        }
+        else
+        {
+            Vector3 mousePixelPosition = Input.mousePosition;
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePixelPosition);
 
-        padNewPosition.x = Mathf.Clamp(padNewPosition.x, - padMaxX, padMaxX);
+            padNewPosition = new Vector3(mouseWorldPosition.x, yPosition, 0); 
+        }
 
-        //if (padNewPosition.x > padMaxX)
-        //{
-        //    padNewPosition.x = padMaxX;
-        //}
-        //if(padNewPosition.x < -padMaxX)
-        //{
-        //    padNewPosition.x = -padMaxX;
-        //}
-
+        padNewPosition.x = Mathf.Clamp(padNewPosition.x, -padMaxX, padMaxX);
         transform.position = padNewPosition;
     }
-
 }
