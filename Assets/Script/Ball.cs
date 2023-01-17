@@ -20,6 +20,12 @@ public class Ball : MonoBehaviour
         yBallPosition = transform.position.y;
     }
 
+
+    public void RestartBall()
+    {
+        isStarted = false;
+    }
+
     private void Update()
     {
         if (isStarted)

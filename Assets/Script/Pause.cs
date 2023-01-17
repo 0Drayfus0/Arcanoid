@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
+    GameObject PausePanel;
     public bool pauseActive;
+
+    public GameObject pausePanel;
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -13,12 +18,18 @@ public class Pause : MonoBehaviour
             {
                 Time.timeScale = 1f;
                 pauseActive = false;
+                
             }
             else
             {
                 Time.timeScale = 0f;
                 pauseActive = true;
+                pausePanel.SetActive(true);
+                    
+                
             }
+
+            pausePanel.SetActive(pauseActive);
         }
     }
 }

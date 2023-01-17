@@ -31,4 +31,9 @@ public class ScoreCounter : MonoBehaviour
         score += addScore;
         ScoreText.text = score.ToString();
     }
+    public void ZeroScore()
+    {
+        score = 0;
+        ScoreText.text = "Points: " + score;
+    }
 }
