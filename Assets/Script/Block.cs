@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    int llives = 2;
+    public int lives;
     public int points;
     public bool invisible;
 
-
+    [Header("Prefabs")]
     public GameObject PickupPrefab;
+    public GameObject particlePrefab;
+
+    [Header("explosive")]
+    public bool explosive;
+    public float explosiveRadius;
+
     SpriteRenderer spriteRenderer;
 
     ScoreCounter scoreCounter;
     LevelManager levelManager;
-
 
     private void Start()
     {
@@ -40,18 +45,45 @@ public class Block : MonoBehaviour
         }
 
 
-        llives--;
-        if(llives <= 0)
+        lives--;
+        if(lives <= 0)
         {
             BlockDestroy();
         }
     }
-    private void BlockDestroy()
+    public void BlockDestroy()
     {
         scoreCounter.AddScore(points);
         levelManager.BlockDestroyed();
-        Instantiate(PickupPrefab, transform.position, Quaternion.identity);
+        ///Instantiate(PickupPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
+
+        if (explosive)
+        {
+            Explode();
+        }
     }
- 
+    public void Explode()
+    {
+        int layerMask = LayerMask.GetMask("Block");
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosiveRadius, layerMask);
+
+        foreach (Collider2D col in colliders)
+        {
+            print(col.name);
+            Block block = col.GetComponent<Block>();
+            if(block == null)
+            {
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                block.BlockDestroy();
+            }
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, explosiveRadius);
+    }
 }

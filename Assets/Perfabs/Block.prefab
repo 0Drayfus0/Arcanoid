@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8707181436029995575}
   - component: {fileID: 8707181436029995569}
   - component: {fileID: 8707181436029995568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 8707181436029995572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0.5, z: -0.1}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5023646, z: 1.5023646}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -124,5 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f10f2d29ac88654493dccb4e6956ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 0
   points: 10
   invisible: 0
+  PickupPrefab: {fileID: 269467906813101253, guid: e3d979647e24ea8419a74453a1fc8fdd, type: 3}
+  particlePrefab: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+  explosive: 1
+  explosiveRadius: 2
