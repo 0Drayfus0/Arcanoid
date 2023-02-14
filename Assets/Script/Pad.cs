@@ -9,11 +9,13 @@ public class Pad : MonoBehaviour
     public bool autoplay;
     float yPosition;
     Pause pause;
+    MainMenu mainMenu;
     Ball ball;
 
     private void Start()
     {
         pause = FindObjectOfType<Pause>();
+        mainMenu = FindObjectOfType<MainMenu>();
         ball = FindObjectOfType<Ball>();
 
         yPosition = transform.position.y;
@@ -23,7 +25,7 @@ public class Pad : MonoBehaviour
     {
         Vector3 padNewPosition;
 
-        if (pause.pauseActive)
+        if (pause.pauseActive || mainMenu.menuActive)
         {
             return;
         }

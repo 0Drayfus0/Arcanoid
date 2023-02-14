@@ -16,15 +16,21 @@ public class Block : MonoBehaviour
     public bool explosive;
     public float explosiveRadius;
 
+    [Header("Sound")]
+    public AudioClip sndBlockDestroy;
+
     SpriteRenderer spriteRenderer;
 
     ScoreCounter scoreCounter;
     LevelManager levelManager;
+    AudioManager audioManager;
 
     private void Start()
     {
         scoreCounter = FindObjectOfType<ScoreCounter>();
         levelManager = FindObjectOfType<LevelManager>();
+        audioManager = FindObjectOfType<AudioManager>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         levelManager.CreateBlock();
@@ -43,8 +49,7 @@ public class Block : MonoBehaviour
             invisible = false;
             return;
         }
-
-
+        
         lives--;
         if(lives <= 0)
         {
@@ -55,7 +60,9 @@ public class Block : MonoBehaviour
     {
         scoreCounter.AddScore(points);
         levelManager.BlockDestroyed();
-        ///Instantiate(PickupPrefab, transform.position, Quaternion.identity);
+
+        //audioManager.PlaySound(sndBlockDestroy);
+      
         Destroy(gameObject);
 
         if (explosive)
@@ -81,9 +88,11 @@ public class Block : MonoBehaviour
                 block.BlockDestroy();
             }
         }
+        
     }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, explosiveRadius);
     }
+   
 }

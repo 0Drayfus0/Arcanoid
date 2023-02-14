@@ -9,6 +9,15 @@ public class Pause : MonoBehaviour
 
     public GameObject pausePanel;
 
+    public AudioClip sndPauseActive;
+    public AudioClip sndPauseDeactivate;
+
+    AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
 
     private void Update()
     {
@@ -18,13 +27,14 @@ public class Pause : MonoBehaviour
             {
                 Time.timeScale = 1f;
                 pauseActive = false;
-                
+                //audioManager.PlaySound(sndPauseActive);
             }
             else
             {
                 Time.timeScale = 0f;
                 pauseActive = true;
                 pausePanel.SetActive(true);
+                //audioManager.PlaySound(sndPauseDeactivate);
                     
                 
             }

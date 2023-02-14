@@ -26,6 +26,11 @@ public class ScoreCounter : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SaceBestScore()
+    {
+        PlayerPrefs.SetInt("bestRecord", score);
+    }
+
     public void AddScore(int addScore)
     {
         score += addScore;

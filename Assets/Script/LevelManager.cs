@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField]int blocksCount;
     int indexScene;
 
+    ScoreCounter scoreCounter;
+
     private void Start()
     {
+        scoreCounter = FindObjectOfType<ScoreCounter>();
         indexScene = SceneManager.GetActiveScene().buildIndex;
     }
     public void CreateBlock()
@@ -22,7 +26,8 @@ public class LevelManager : MonoBehaviour
         if(blocksCount <= 0)
         {
            
-            SceneManager.LoadScene(indexScene);
+            SceneManager.LoadScene(indexScene + 1);
+            scoreCounter.SaceBestScore();
         }
     }
     public void RestartGame()

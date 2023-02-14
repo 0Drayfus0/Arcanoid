@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PickupMagnet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    AudioSource audioSource;
+    private void Awake()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void PlaySound(AudioClip sound)
     {
-        
+        audioSource.PlayOneShot(sound);
     }
 }
