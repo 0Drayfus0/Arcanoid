@@ -105,12 +105,11 @@ public class Ball : MonoBehaviour
             Vector3 ballNewPosition = new Vector3(pad.transform.position.x, yBallPosition, 0);
             transform.position = ballNewPosition;
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 StartBall();
             }
         }
-        print(rb.velocity.magnitude);
     }
     private void OnDrawGizmos()
     {

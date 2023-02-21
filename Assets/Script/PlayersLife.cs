@@ -7,8 +7,10 @@ public class PlayersLife : MonoBehaviour
 {
     public Text LifeText;
 
-    [SerializeField] int lifes;
+    public List<GameObject> lifesPng;
+    
     int indexLifes;
+    [SerializeField] int lifes;
 
     LevelManager levelManager;
     Ball ball;
@@ -21,6 +23,8 @@ public class PlayersLife : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         scoreCounter = FindObjectOfType<ScoreCounter>();
         ball = FindObjectOfType<Ball>();
+
+        LifesTextUI();
     }
     public void LoseLife()
 
@@ -37,8 +41,21 @@ public class PlayersLife : MonoBehaviour
             lifes = indexLifes;
             levelManager.RestartGame();
         }
-
+        LifesTextUI();
     }
-    
+    private void LifesTextUI()
+    {
+        for (int index = 0; index < lifesPng.Count; index++)
+        {
+            if(index < lifes)
+            {
+                lifesPng[index].SetActive(true);
+            }
+            else
+            {
+                lifesPng[index].SetActive(false);
+            }
+        }
+    }
 }
 

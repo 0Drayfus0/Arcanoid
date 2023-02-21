@@ -5,8 +5,12 @@ using UnityEngine;
 public class Pad : MonoBehaviour
 {
     public float padMaxX;
+    public float padSpeed;
 
     public bool autoplay;
+    public bool Keyboard;
+    
+
     float yPosition;
     Pause pause;
     MainMenu mainMenu;
@@ -20,6 +24,7 @@ public class Pad : MonoBehaviour
 
         yPosition = transform.position.y;
         Cursor.visible = false;
+
     }
     private void Update()
     {
@@ -34,6 +39,18 @@ public class Pad : MonoBehaviour
         {
             Vector3 ballPosition = ball.transform.position;
             padNewPosition = new Vector3(ballPosition.x, yPosition, 0);
+        }
+        if (Keyboard)
+        {
+            padNewPosition = transform.position;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                padNewPosition.x += padSpeed * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                padNewPosition.x -= padSpeed * Time.deltaTime; 
+            }
         }
         else
         {
